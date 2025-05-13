@@ -1,4 +1,4 @@
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import { getParam } from "./utils.mjs";
 import ProductDetails from "./ProductDetails.mjs";
@@ -10,7 +10,19 @@ product.init();
 
 function addProductToCart(product) {
   const cartItems = getLocalStorage("so-cart") || [];
-  cartItems.push(product);
+  
+  const existingProductIndex = cartItems.findIndex(item => item.Id === product.Id);
+  
+  if (existingProductIndex >= 0) {
+    if (!cartItems[existingProductIndex].quantity) {
+      cartItems[existingProductIndex].quantity = 1;
+    }
+    cartItems[existingProductIndex].quantity += 1;
+  } else {
+    product.quantity = 1;
+    cartItems.push(product);
+  }
+  
   setLocalStorage("so-cart", cartItems);
 }
 // add to cart button event handler
