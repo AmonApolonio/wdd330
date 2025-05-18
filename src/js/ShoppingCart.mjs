@@ -5,10 +5,10 @@ function cartItemTemplate(item) {
     <a href="#" class="cart-card__image">
       <img src="${item.Image}" alt="${item.Name}" />
     </a>
-    <a href="#">
+    <a href="#" class="cart-card__info">
       <h2 class="card__name">${item.Name}</h2>
+      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <div class="cart-card__quantity-control">
       <button class="quantity-btn decrease-btn" data-id="${item.Id}">−</button>
       <p class="cart-card__quantity">${item.quantity || 1}</p>
