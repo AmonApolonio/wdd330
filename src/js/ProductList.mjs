@@ -26,6 +26,10 @@ export default class ProductList {
   }
 
   renderList(list) {
+    if (!Array.isArray(list) || list.length === 0) {
+      this.listElement.innerHTML = '<li class="empty-category">No products found in this category.</li>';
+      return;
+    }
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 
