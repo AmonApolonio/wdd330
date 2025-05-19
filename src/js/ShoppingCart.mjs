@@ -1,6 +1,9 @@
 import { getLocalStorage, setLocalStorage, renderListWithTemplate } from "./utils.mjs";
 
 function cartItemTemplate(item) {
+  const quantity = item.quantity || 1;
+  const unitPrice = Number(item.FinalPrice);
+  const totalPrice = (unitPrice * quantity).toFixed(2);
   return `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
       <img src="${item.Image}" alt="${item.Name}" />
@@ -11,10 +14,10 @@ function cartItemTemplate(item) {
     </a>
     <div class="cart-card__quantity-control">
       <button class="quantity-btn decrease-btn" data-id="${item.Id}">−</button>
-      <p class="cart-card__quantity">${item.quantity || 1}</p>
+      <p class="cart-card__quantity">${quantity}</p>
       <button class="quantity-btn increase-btn" data-id="${item.Id}">+</button>
     </div>
-    <p class="cart-card__price">$${item.FinalPrice}</p>
+    <p class="cart-card__price">$${totalPrice}</p>
     <span class="cart-card__remove" data-id="${item.Id}">×</span>
   </li>`;
 }
@@ -27,14 +30,28 @@ export default class ShoppingCart {
 
   renderCartContents() {
     const cartItems = getLocalStorage("so-cart");
+    const cartFooter = document.querySelector('.cart-footer');
+    const cartTotal = document.querySelector('.cart-total');
     if (cartItems && cartItems.length > 0) {
       this.listElement.innerHTML = "";
       renderListWithTemplate(cartItemTemplate, this.listElement, cartItems, "beforeend", false);
       this.addEventListeners();
+      if (cartFooter && cartTotal) {
+        cartFooter.classList.remove('hide');
+        const total = cartItems.reduce((sum, item) => {
+          const quantity = item.quantity || 1;
+          const unitPrice = Number(item.FinalPrice);
+          return sum + (unitPrice * quantity);
+        }, 0);
+        cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+      }
     } else {
       this.listElement.innerHTML = `<li class="empty-cart">
         <span>Your cart is empty, start shopping now ;)</span>
       </li>`;
+      if (cartFooter) {
+        cartFooter.classList.add('hide');
+      }
     }
     if (typeof this.onCartChange === "function") {
       this.onCartChange();
