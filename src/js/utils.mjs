@@ -59,6 +59,9 @@ export async function loadHeaderFooter() {
 
   if (headerElement) {
     renderWithTemplate(headerTemplate, headerElement);
+    import("./cart-badge.js").then(module => {
+      if (module.updateCartCount) module.updateCartCount();
+    });
   }
   if (footerElement) {
     renderWithTemplate(footerTemplate, footerElement);

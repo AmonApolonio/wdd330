@@ -124,11 +124,40 @@ button {
 }
 
 .cart svg {
-  width: 25px;
+  width: 30px;
+  height:30px;
+  vertical-align: top;
+  margin-top: -4px;
 }
 
 .cart:hover svg {
   fill: gray;
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #fbb03b;
+  color: #222;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #fff;
+  min-width: 20px;
+  text-align: center;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  #cart-count {
+    font-size: 0.9rem;
+    min-width: 16px;
+    padding: 1px 4px;
+    top: -6px !important;
+    right: -6px !important;
+  }
 }
 
 /* End cart icon styles */

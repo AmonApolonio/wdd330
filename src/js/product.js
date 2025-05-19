@@ -2,6 +2,7 @@ import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import { getParam } from "./utils.mjs";
 import ProductDetails from "./ProductDetails.mjs";
+import { updateCartCount } from "./cart-badge.js";
 
 const dataSource = new ProductData();
 const productID = getParam("products");
@@ -27,6 +28,7 @@ function addProductToCart(product) {
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
   addProductToCart(product);
+  updateCartCount();
 }
 
 document

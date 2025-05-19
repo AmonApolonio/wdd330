@@ -20,8 +20,9 @@ function cartItemTemplate(item) {
 }
 
 export default class ShoppingCart {
-  constructor(listElement) {
+  constructor(listElement, onCartChange) {
     this.listElement = listElement;
+    this.onCartChange = onCartChange;
   }
 
   renderCartContents() {
@@ -34,6 +35,9 @@ export default class ShoppingCart {
       this.listElement.innerHTML = `<li class="empty-cart">
         <span>Your cart is empty, start shopping now ;)</span>
       </li>`;
+    }
+    if (typeof this.onCartChange === "function") {
+      this.onCartChange();
     }
   }
 
