@@ -44,6 +44,13 @@ export default class ShoppingCart {
           return sum + (unitPrice * quantity);
         }, 0);
         cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        if (!document.querySelector('.checkout-btn')) {
+          const checkoutBtn = document.createElement('a');
+          checkoutBtn.href = '../checkout/index.html';
+          checkoutBtn.className = 'checkout-btn button';
+          checkoutBtn.textContent = 'Checkout';
+          cartFooter.appendChild(checkoutBtn);
+        }
       }
     } else {
       this.listElement.innerHTML = `<li class="empty-cart">

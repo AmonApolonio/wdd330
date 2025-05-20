@@ -1,10 +1,10 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import { getParam } from "./utils.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 import { updateCartCount } from "./cart-badge.js";
 
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const productID = getParam("products");
 const product = new ProductDetails(productID, dataSource);
 product.init();
