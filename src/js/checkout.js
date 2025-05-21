@@ -1,5 +1,6 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, alertMessage } from "./utils.mjs";
 import CheckoutProcess from './CheckoutProcess.mjs';
+import "../css/alert.css";
 
 loadHeaderFooter();
 
@@ -49,11 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
       checkout.calculateOrderTotal();
       try {
         const response = await checkout.checkout(form);
-        alert('Order submitted! Thank you for your purchase.');
         window.localStorage.removeItem('so-cart');
-        window.location.href = '../index.html';
+        window.location.href = 'success.html';
       } catch (err) {
-        alert('Order failed: ' + err.message);
+        alertMessage('Order failed: ' + err.message);
       }
     });
   }

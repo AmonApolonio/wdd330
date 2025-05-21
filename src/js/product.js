@@ -1,8 +1,9 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, alertMessage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import { getParam } from "./utils.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 import { updateCartCount } from "./cart-badge.js";
+import "../css/alert.css";
 
 const dataSource = new ExternalServices();
 const productID = getParam("products");
@@ -29,6 +30,7 @@ async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
   addProductToCart(product);
   updateCartCount();
+  alertMessage("Item added to cart!");
 }
 
 document

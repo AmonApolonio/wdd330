@@ -1,0 +1,44 @@
+.alert {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 6px;
+  padding: 1em 2.5em 1em 1em;
+  margin-bottom: 1.2em;
+  font-size: 1em;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(240,168,104,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeInAlert 0.3s;
+  z-index: 10;
+}
+.alert__text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.alert__close {
+  position: static;
+  right: unset;
+  top: unset;
+  background: none;
+  border: none;
+  color: #856404;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  align-self: center;
+  margin-left: 1em;
+}
+@keyframes fadeInAlert {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-out {
+  opacity: 0 !important;
+  transition: opacity 0.5s;
+}

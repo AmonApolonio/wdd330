@@ -80,8 +80,12 @@ export default class CheckoutProcess {
     order.shipping = this.shipping;
     order.tax = this.tax.toFixed(2);
 
-    const module = await import('./ExternalServices.mjs');
-    const services = new module.default();
-    return services.submitOrder(order);
+    try {
+      const module = await import('./ExternalServices.mjs');
+      const services = new module.default();
+      return await services.submitOrder(order);
+    } catch (err) {
+      throw err;
+    }
   }
 }
