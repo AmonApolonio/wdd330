@@ -47,3 +47,10 @@ async function showProducts() {
 }
 
 showProducts();
+
+const sortSelect = document.getElementById('sort-select');
+if (sortSelect) {
+  sortSelect.addEventListener('change', (e) => {
+    myList.sortAndRender(e.target.value);
+  });
+}

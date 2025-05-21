@@ -18,6 +18,7 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.currentList = null;
   }
 
   async init() {
@@ -40,7 +41,27 @@ export default class ProductList {
       this.listElement.innerHTML = '<li class="empty-category">No products found in this category.</li>';
       return;
     }
+    this.currentList = list;
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 
+  sortAndRender(sortValue) {
+    if (!this.currentList) return;
+    let sorted = [...this.currentList];
+    switch (sortValue) {
+      case 'name-asc':
+        sorted.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+      case 'name-desc':
+        sorted.sort((a, b) => b.Name.localeCompare(a.Name));
+        break;
+      case 'price-asc':
+        sorted.sort((a, b) => Number(a.FinalPrice) - Number(b.FinalPrice));
+        break;
+      case 'price-desc':
+        sorted.sort((a, b) => Number(b.FinalPrice) - Number(a.FinalPrice));
+        break;
+    }
+    renderListWithTemplate(productCardTemplate, this.listElement, sorted);
+  }
 }
